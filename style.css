@@ -1,0 +1,702 @@
+
+/* ---------- Colours ---------- */
+:root {
+  --bg: #f6f1e6;  /* page background */
+  --fg: #17261d;  /* main text colour */
+  --cd: #ffffff;  /* card background */
+  --gold: #b8892f;  /* accent colour (lines, highlights) */
+  --mut: #5d6b61;  /* soft grey-green text */
+  --ln: #e6dcc3;  /* thin border lines */
+  --ok: #1f7a4d;  /* green: success and approved */
+  --warn: #a8691a;  /* amber: waiting */
+  --bad: #b3261e;  /* red: errors and rejected */
+  --dark: #123524;  /* deep green: header and main buttons */
+  --r: 16px;  /* how round the card corners are */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1a12;
+    --fg: #f1ead6;
+    --cd: #14271c;
+    --gold: #d9b25a;
+    --mut: #a9b5aa;
+    --ln: #2c4435;
+    --ok: #4cc38a;
+    --warn: #e0a64d;
+    --bad: #ff8a80;
+  }
+}
+
+/* ---------- Page basics ---------- */
+
+/* Anything marked hidden disappears completely. The pages and pop-ups rely on this. */
+[hidden] {
+  display: none !important;
+}
+
+/* Padding and borders never make a box wider than its container. */
+* {
+  box-sizing: border-box;
+}
+
+/* Page background, text colour and font. */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Keeps the content in a centred column that reads well on phones and laptops. */
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 16px 14px 70px;
+}
+
+/* Headings use an elegant serif font. */
+h1,
+h2,
+h3 {
+  font-family: "Playfair Display", Georgia, serif;
+  margin: .2em 0 .4em;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 1.25rem;
+}
+
+a {
+  color: var(--gold);
+}
+
+.mut {
+  color: var(--mut);
+  font-size: .9rem;
+}
+
+/* ---------- Hero ---------- */
+/* The big green header. A header picture you upload is drawn behind it. */
+.hero {
+  background: linear-gradient(160deg, #0f2e20, #1f4d37);
+  color: #f6efdc;
+  text-align: center;
+  padding: 54px 20px 36px;
+  border-bottom: 4px solid var(--gold);
+  position: relative;
+}
+
+.hero .kick {
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: #e0bb62;
+  font-size: .8rem;
+  margin: 0;
+}
+
+.hero h1 {
+  font-size: clamp(1.9rem, 7.5vw, 3rem);
+  margin: .25em 0;
+}
+
+.hero p {
+  margin: .2em 0;
+}
+
+.hero .host {
+  opacity: .85;
+  font-style: italic;
+}
+
+.hero {
+  background-size: cover;
+  background-position: center;
+}
+
+/* The English / Kiswahili button in the top corner. */
+.lang {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  background: none;
+  border: 1px solid #e0bb62;
+  color: #e0bb62;
+  border-radius: 20px;
+  padding: 5px 14px;
+  cursor: pointer;
+}
+
+/* The countdown boxes (days, hours, minutes, seconds). */
+.cd {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.cd div {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(224,187,98,.4);
+  border-radius: 12px;
+  padding: 8px 12px;
+  min-width: 58px;
+}
+
+.cd b {
+  display: block;
+  font-size: 1.4rem;
+}
+
+.cd small {
+  font-size: .7rem;
+  opacity: .8;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+/* ---------- Cards and layout ---------- */
+/* Cards: the white boxes that hold each part of the page. */
+.card {
+  background: var(--cd);
+  border: 1px solid var(--ln);
+  border-radius: var(--r);
+  padding: 18px;
+  margin: 14px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+}
+
+.choice {
+  display: grid;
+  gap: 12px;
+}
+
+.opt {
+  text-align: left;
+  padding: 20px;
+  border-radius: var(--r);
+  border: 1px solid var(--ln);
+  background: var(--cd);
+  color: var(--fg);
+  cursor: pointer;
+  font: inherit;
+}
+
+.opt b {
+  display: block;
+  font: 700 1.2rem Georgia, serif;
+}
+
+.opt:hover {
+  border-color: var(--gold);
+}
+
+.desc {
+  white-space: pre-wrap;
+}
+
+.meta {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.meta li {
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--ln);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.meta li span {
+  color: var(--mut);
+}
+
+.meta li b {
+  text-align: right;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---------- Forms and buttons ---------- */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 5px 0;
+  border: 1px solid var(--ln);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+label {
+  display: block;
+  font-size: .85rem;
+  color: var(--mut);
+  margin-top: 8px;
+}
+
+/* Buttons. The main button is solid green; add the class variants below for other looks. */
+.btn {
+  padding: 13px 16px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--dark);
+  color: #f6efdc;
+  font: 600 1rem system-ui;
+  cursor: pointer;
+  border-bottom: 3px solid var(--gold);
+  width: 100%;
+  margin-top: 8px;
+}
+
+.btn.ghost {
+  background: none;
+  color: var(--fg);
+  border: 1px solid var(--ln);
+  width: auto;
+  margin: 0;
+}
+
+.btn.danger {
+  background: var(--bad);
+  color: #fff;
+  border-bottom-color: #7a1913;
+  width: auto;
+  margin: 0;
+}
+
+.btn.good {
+  background: var(--ok);
+  color: #fff;
+  border-bottom-color: #14502f;
+  width: auto;
+  margin: 0;
+}
+
+.btn.sm {
+  padding: 7px 12px;
+  font-size: .9rem;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: .5;
+}
+
+.err {
+  color: var(--bad);
+  min-height: 1.2em;
+}
+
+/* ---------- Progress, badges, ticket ---------- */
+/* The seats progress bar. */
+.bar {
+  height: 10px;
+  background: var(--ln);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), #e0bb62);
+  border-radius: 10px;
+  transition: width .4s;
+}
+
+.cnt {
+  font-size: 1.15rem;
+  color: var(--gold);
+  font-weight: 700;
+  text-align: center;
+  margin: 10px 0 0;
+}
+
+/* Small status labels such as pending, approved, rejected. */
+.badge {
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: var(--ln);
+}
+
+.badge.pending,
+.badge.new {
+  background: #fff1d6;
+  color: var(--warn);
+}
+
+.badge.approved,
+.badge.done {
+  background: #d9f3e5;
+  color: var(--ok);
+}
+
+.badge.rejected {
+  background: #fde1de;
+  color: var(--bad);
+}
+
+/* The invitation ticket shown after a booking is approved. */
+.ticket {
+  border: 2px solid var(--gold);
+  border-radius: var(--r);
+  padding: 18px;
+  text-align: center;
+  background: var(--cd);
+}
+
+.ticket .code {
+  font: 700 1.8rem Georgia, serif;
+  color: var(--gold);
+  letter-spacing: .1em;
+  margin: 8px 0;
+}
+
+details {
+  border-bottom: 1px solid var(--ln);
+  padding: 10px 0;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ---------- Admin dashboard ---------- */
+.bar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 6px 0 10px;
+}
+
+/* The row of admin tabs (Overview, Bookings, Door ...). */
+.tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  padding: 8px 0;
+  z-index: 5;
+}
+
+.tab {
+  border: 1px solid var(--ln);
+  background: var(--cd);
+  color: var(--fg);
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  font: inherit;
+}
+
+.tab.on {
+  background: var(--dark);
+  color: #f6efdc;
+  border-color: var(--gold);
+}
+
+.dot {
+  background: var(--bad);
+  color: #fff;
+  border-radius: 10px;
+  padding: 0 7px;
+  margin-left: 6px;
+  font-style: normal;
+  font-size: .75rem;
+}
+
+/* The number boxes on the admin Overview tab. */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.stat {
+  background: var(--cd);
+  border: 1px solid var(--ln);
+  border-radius: var(--r);
+  padding: 14px;
+}
+
+.stat small {
+  color: var(--mut);
+  display: block;
+}
+
+.stat b {
+  font: 700 1.5rem Georgia, serif;
+  display: block;
+}
+
+.stat span {
+  font-size: .85rem;
+  color: var(--mut);
+  display: block;
+}
+
+.chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+
+.chip {
+  border: 1px solid var(--ln);
+  background: none;
+  color: var(--fg);
+  border-radius: 20px;
+  padding: 5px 14px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.chip.on {
+  background: var(--gold);
+  color: #fff;
+  border-color: var(--gold);
+}
+
+.item {
+  margin: 10px 0;
+}
+
+.big {
+  font-size: 1.4rem;
+  text-align: center;
+  letter-spacing: .08em;
+}
+
+/* The big VALID / NOT VALID result at the door. */
+.verdict {
+  border-radius: var(--r);
+  padding: 16px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.verdict.good {
+  background: #d9f3e5;
+  color: #14502f;
+}
+
+.verdict.bad {
+  background: #fde1de;
+  color: #7a1913;
+}
+
+.verdict.warn {
+  background: #fff1d6;
+  color: #7a4a0a;
+}
+
+/* ---------- Toasts ---------- */
+/* Small pop-up messages at the bottom of the screen. */
+#toast {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.toast {
+  background: var(--dark);
+  color: #f6efdc;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border-left: 4px solid var(--ok);
+  box-shadow: 0 4px 14px rgba(0,0,0,.25);
+  max-width: 90vw;
+}
+
+.toast.bad {
+  border-left-color: var(--bad);
+}
+
+@media (min-width: 560px) {
+  .stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------- Photos ---------- */
+/* Photo grid and the full-screen photo viewer. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.ph {
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  cursor: pointer;
+  background: var(--ln);
+}
+
+.ph img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.thumb {
+  max-width: 100%;
+  max-height: 160px;
+  border-radius: 10px;
+  display: block;
+  margin: 8px 0;
+}
+
+.thumb.wide {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.lb {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.92);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  color: #fff;
+  gap: 10px;
+}
+
+.lb img {
+  max-width: 100%;
+  max-height: 68vh;
+  border-radius: 8px;
+}
+
+.lb .btn.ghost {
+  color: #fff;
+  border-color: rgba(255,255,255,.4);
+}
+
+/* ---------- Menu, compact header, test-mode bar ---------- */
+/* The menu bar with the page links. */
+nav.site {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--bg);
+  border-bottom: 1px solid var(--ln);
+  padding: 8px 10px;
+}
+
+nav.site a {
+  white-space: nowrap;
+  padding: 8px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: var(--fg);
+  border: 1px solid transparent;
+}
+
+nav.site a:hover {
+  border-color: var(--ln);
+}
+
+nav.site a.on {
+  background: var(--dark);
+  color: #f6efdc;
+  border-color: var(--gold);
+}
+
+@media (min-width: 640px) {
+  nav.site {
+    justify-content: center;
+  }
+}
+
+.tabs {
+  top: 52px;
+}
+
+.modebar {
+  background: #fff3cd;
+  color: #664d03;
+  padding: 8px 12px;
+  font-size: .85rem;
+  text-align: center;
+}
+
+.linkbtn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+
+body.compact .hero {
+  padding: 22px 16px 14px;
+}
+
+body.compact .hero .kick,
+body.compact .hero .host,
+body.compact #hw,
+body.compact #hv,
+body.compact .cd {
+  display: none;
+}
+
+body.compact .hero h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
