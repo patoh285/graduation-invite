@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Event Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="modebar" id="mode" data-t="testBanner" hidden></div>
+
+  <!-- Header (shown on every page) -->
+  <header class="hero" id="hero">
+    <button class="lang" id="lg"></button>
+    <p class="kick" data-t="kicker"></p>
+    <h1 id="hn"></h1>
+    <p class="host" id="hh"></p>
+    <p id="hw"></p>
+    <p id="hv"></p>
+    <div class="cd" id="cd"></div>
+  </header>
+
+  <!-- Menu: every link is a page you can share, for example yoursite/#book -->
+  <nav class="site" id="nav">
+    <a href="#home" data-page="home" data-t="nHome"></a>
+    <a href="#book" data-page="book" data-t="nBook"></a>
+    <a href="#ticket" data-page="ticket" data-t="nTicket"></a>
+    <a href="#photos" data-page="photos" data-t="nPhotos"></a>
+    <a href="#ask" data-page="ask" data-t="nAsk"></a>
+    <a href="#admin" data-page="admin" data-t="nAdmin"></a>
+  </nav>
+
+  <main>
+
+    <!-- Page: home -->
+    <section class="page" id="p-home">
+      <div class="card">
+        <h2 data-t="about"></h2>
+        <p class="desc" id="ab"></p>
+        <ul class="meta">
+          <li><span data-t="when"></span><b id="mw"></b></li>
+          <li><span data-t="where"></span><b id="mv"></b></li>
+        </ul>
+        <div class="actions">
+          <a class="btn ghost sm" id="amap" target="_blank" rel="noopener" data-t="map"></a>
+          <button class="btn ghost sm" id="bcal" data-t="cal"></button>
+          <button class="btn ghost sm" id="bshare" data-t="share"></button>
+        </div>
+      </div>
+      <div id="sx"></div>
+      <div class="card">
+        <h2 data-t="seatsT"></h2>
+        <div class="bar"><div class="fill" id="sbar"></div></div>
+        <p class="cnt" id="cnt"></p>
+        <a class="btn linkbtn" href="#book" data-t="bookNow"></a>
+      </div>
+    </section>
+
+    <!-- Page: book seats -->
+    <section class="page" id="p-book" hidden>
+      <div class="card" id="form">
+        <h2 data-t="res"></h2>
+        <label data-t="ppl"></label>
+        <select id="n"></select>
+        <div id="rows"></div>
+        <p class="cnt" id="tot"></p>
+        <p class="mut" id="pay"></p>
+        <input id="mp" data-p="mp" autocapitalize="characters" autocomplete="off">
+        <div id="msg" class="err"></div>
+        <button class="btn" id="go" data-t="send"></button>
+      </div>
+      <div class="card" id="fullnote" hidden><h2 data-t="full"></h2></div>
+    </section>
+
+    <!-- Page: my ticket (also opens from a link like yoursite/#ticket-ABC123XYZ) -->
+    <section class="page" id="p-ticket" hidden>
+      <div class="card">
+        <h2 data-t="chk"></h2>
+        <p class="mut" data-t="chkHint"></p>
+        <input id="q" data-p="mp" autocapitalize="characters" autocomplete="off">
+        <button class="btn" id="ck" data-t="chk"></button>
+        <div id="res" style="margin-top:12px"></div>
+      </div>
+    </section>
+
+    <!-- Page: photos -->
+    <section class="page" id="p-photos" hidden>
+      <div class="card">
+        <h2 data-t="gallery"></h2>
+        <div class="grid" id="gg"></div>
+      </div>
+    </section>
+
+    <!-- Page: questions and FAQ -->
+    <section class="page" id="p-ask" hidden>
+      <div class="card">
+        <h2 data-t="ask"></h2>
+        <p class="mut" data-t="askHint"></p>
+        <select id="ak"><option value="question" data-t="kindQ"></option><option value="feedback" data-t="kindF"></option></select>
+        <input id="an" data-p="yname" maxlength="80">
+        <input id="ac" data-p="ycontact" maxlength="80">
+        <textarea id="at" data-p="ytext" maxlength="1000"></textarea>
+        <div id="am" class="err"></div>
+        <button class="btn" id="as" data-t="asend"></button>
+      </div>
+      <div class="card">
+        <h2 data-t="faq"></h2>
+        <div id="fq"></div>
+      </div>
+    </section>
+
+    <!-- Page: admin (login, then the dashboard) -->
+    <section class="page" id="p-admin" hidden>
+      <div id="app"></div>
+    </section>
+
+  </main>
+
+  <div id="lb" class="lb" hidden>
+    <button class="btn ghost sm" id="lbx" data-t="close"></button>
+    <img id="lbi" alt="">
+    <p id="lbc"></p>
+    <div class="actions"><button class="btn ghost sm" id="lbp">←</button><button class="btn ghost sm" id="lbn">→</button></div>
+  </div>
+
+  <div id="toast"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
